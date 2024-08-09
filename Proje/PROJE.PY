@@ -1,7 +1,5 @@
 import time 
 import calendar
-#print("Tek yön\n""Gidiş-Dönüş")
-#yön_seçim=input("Yön seçiminizi yapınız(Tek yön için 1'e basınız.Gidiş-Dönüş için ise 2'e basınız2):")
 havalimanlari={ 
     1:"Ankara Esenboğa Havalimanı ",
     2:"İstanbul Sabiha Gökçen Havalimanı",
