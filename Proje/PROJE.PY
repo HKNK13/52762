@@ -3,11 +3,11 @@ import calendar
 #print("Tek yön\n""Gidiş-Dönüş")
 #yön_seçim=input("Yön seçiminizi yapınız(Tek yön için 1'e basınız.Gidiş-Dönüş için ise 2'e basınız2):")
 havalimanlari={ 
-    1:"Ankara Esenboğa Havalimanı ",
+    1:"Ankara Esenboğa Havalimanı",
     2:"İstanbul Sabiha Gökçen Havalimanı",
     3:"Van Ferit Melen Havalimanı",
-    4:"Izmir Adnan Menderes Havalimanı ",
-    5:"Fraport Tav Antalya Havalimanı "}
+    4:"Izmir Adnan Menderes Havalimanı",
+    5:"Fraport Tav Antalya Havalimanı"}
 for key,value in havalimanlari.items():
     print(f"{key}:{value}")
 try:
@@ -38,7 +38,7 @@ aylar={
         "ocak":1,"şubat":2,"mart":3,"nisan":4,"mayıs":5,"haziran":6,
         "temmuz":7,"ağustos":8,"eylül":9,"ekim":10,"kasım":11,"aralık":12# tarih hatası!!!
         }
-ay=str(input("İşlem yapmak istediğiniz ayı seçiniz:"))
+ay=str(input("İşlem yapmak istediğiniz ayı yazınız:"))
 ayı=aylar[f"{ay}"]
 b=calendar.TextCalendar(calendar.MONDAY)
 c=b.formatmonth(yıl,ayı)
@@ -69,5 +69,24 @@ else:
     else:
         print("Tarih seçerken hata yaptınız.Lütfen başa döünüz.")
         exit()
-
- 
+#print(f"{yıl}-{ayı}-{gün} tarihindeki uçuşlarımız")
+time.sleep(1)
+def uçuş_seçim():
+    havalimanlari_listesi=["Ankara Esenboğa Havalimanı","İstanbul Sabiha Gökçen Havalimanı","Van Ferit Melen Havalimanı",
+                            "Izmir Adnan Menderes Havalimanı","Fraport Tav Antalya Havalimanı"]
+    if kalkış_havalimanı==havalimanlari_listesi[0]:
+        if varış_havalimanı==havalimanlari_listesi[1]:
+            uçuş_saatleri={1:"09.00",2:"11.00"}
+            for key,value in uçuş_saatleri.items():
+                print(f"{key}:{value}")
+            uçuş_seç=int(input("İstediğiniz uçuş numarasını girin:"))
+            uçuş=uçuş_saatleri[uçuş_seç]
+            print(f"{yıl}-{ay}-{gün}-{uçuş}")
+        elif varış_havalimanı==havalimanlari_listesi[2]:
+            uçuş_saatleri={1:"09.00",2:"11.00"}
+            for key,value in uçuş_saatleri.items():
+                print(f"{key}:{value}")
+            uçuş_seç=int(input("İstediğiniz uçuş numarasını girin:"))
+            uçuş=uçuş_saatleri[uçuş_seç]
+            print(f"Uçuş bilgileriniz:{yıl}-{ay}-{gün}-{uçuş}")
+uçuş_seçim() 
