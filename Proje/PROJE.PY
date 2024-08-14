@@ -1,6 +1,9 @@
 import time 
 import calendar
+<<<<<<< HEAD
 print("Hoşgeldiniz.\nLütfen havalimanları seçinizi yapınız. ")
+=======
+>>>>>>> 074314f292f7fc29ea417deba47d1dd6005ea774
 havalimanlari={ 
     1:"Ankara Esenboğa Havalimanı",
     2:"İstanbul Sabiha Gökçen Havalimanı",
