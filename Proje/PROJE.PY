@@ -1,9 +1,6 @@
 import time 
 import calendar
-<<<<<<< HEAD
-print("Hoşgeldiniz.\nLütfen havalimanları seçinizi yapınız. ")
-=======
->>>>>>> 074314f292f7fc29ea417deba47d1dd6005ea774
+print("Hoşgeldiniz.\nLütfen havalimanları seçiminizi yapınız.")
 havalimanlari={ 
     1:"Ankara Esenboğa Havalimanı",
     2:"İstanbul Sabiha Gökçen Havalimanı",
@@ -340,7 +337,20 @@ bilet.biletTürü()
 bilet.koltukSınıfı()
 bilet_fiyatı = Fiyat(bilet.bilet_türü, bilet.koltuk_sınıfı)
 bilet_fiyatı.bilet_fiyat()
- 
+
+def kişi_bilgileri():
+    ad=str(input("Lütfen adınızı giriniz:"))
+    soyad=str(input("Lütfen soyadınızı giriniz:"))
+    tc=int(input("Lütfen 11 haneli kimlik numaranızı giriniz:"))
+    yaş=int(input("Lütfen yaşınızı giriniz:"))
+    with open("bilgiler.txt", "w", encoding="utf-8") as file:
+        file.write(f"Adınız: {ad} {soyad}\n")
+        file.write(f"TC kimlik numaranız: {tc}\n")
+        file.write(f"Yaşınız: {yaş}\n")
+        file.write(f"Uçuşunuz: {kalkış_havalimanı} - {varış_havalimanı}\n")
+        file.write(f"Uçuş tarihi: {gün}-{ay}-{yıl}\n")
+kişi_bilgileri()  
+
 
 
 
