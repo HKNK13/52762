@@ -1,13 +1,13 @@
 import time 
 import calendar
 print("Hoşgeldiniz.\nLütfen havalimanları seçiminizi yapınız.")
+time.sleep(1)
 havalimanlari={ 
     1:"Ankara Esenboğa Havalimanı",
     2:"İstanbul Sabiha Gökçen Havalimanı",
     3:"Van Ferit Melen Havalimanı",
     4:"Izmir Adnan Menderes Havalimanı",
     5:"Fraport Tav Antalya Havalimanı"}
-time.sleep(1)
 print("Havalimanları:")
 for key,value in havalimanlari.items():
     print(f"{key}:{value}")
@@ -36,260 +36,292 @@ while True:
 time.sleep(1)
 print(f"{kalkış_havalimanı}-{varış_havalimanı} arası uçuşunuz için lütfen diğer işlemlere devam ediniz")
 time.sleep(1)
+print(" ")
 print("Lütfen tarih seçiniz")
-yıl=int(input("İşlem yapmak istediğiniz yılı seçiniz:"))
-aylar={
-        "ocak":1,"şubat":2,"mart":3,"nisan":4,"mayıs":5,"haziran":6,
-        "temmuz":7,"ağustos":8,"eylül":9,"ekim":10,"kasım":11,"aralık":12# tarih hatası!!!
-        }
-ay=str(input("İşlem yapmak istediğiniz ayı yazınız:")).lower()
-ayı=aylar[f"{ay}"]
-b=calendar.TextCalendar(calendar.MONDAY)
-c=b.formatmonth(yıl,ayı)
-print(c)
-gün=int(input("İşlem yapmak istediğiniz günü giriniz:")) 
-if yıl%4==0 and ay=="şubat":
-    if gün<=29:
-        print(f"Tarih seçiminiz:{yıl}-{ayı}-{gün}")
+while True:
+    yıl=int(input("İşlem yapmak istediğiniz yılı seçiniz: "))
+    if yıl<2024:
+        print("Hata yaptınız tekrar yıl seçiniz.")
     else:
-        print("Tarih seçerken hata yaptınız.Lütfen başa döünüz.")
-        exit()
-elif yıl%4!=0 and ay=="şubat":
+        break 
+while True:
+    aylar={
+        1:"Ocak",2:"Şubat",3:"Mart",4:"Nisan",5:"Mayıs",6:"Haziran",
+        7:"Temmuz",8:"Ağustos",9:"Eylül",10:"Ekim",11:"Kasım",12:"Aralık"}
+    ay=int(input("İşlem yapmak istediğniz ayın numarasını giriniz(1 den 12 e kadar): ")) 
+    if ay>12:
+        print("Ay seçerken hata yaptınız.Tekrar seçiniz.")
+    else :
+        ayı=aylar[ay]
+        break
+a=calendar.TextCalendar(calendar.MONDAY)
+b=a.formatmonth(yıl,ay)
+print(b)
+while True:
+    gün=int(input("İşlem yapmak istediğiniz günü giriniz:")) 
+    if yıl%4==0 and ay==2:
+        if gün<=29:
+            print(f"Tarih seçiminiz :{gün}-{ay}-{yıl}")
+            break 
+        else:
+            print("Gün seçerken hata yaptınız.Lütfen tekrar gün seçiniz.")
+    elif yıl%4!=0 and ay==2:
         if gün<=28:
-            print(f"Tarih seçiminiz:{yıl}-{ayı}-{gün}")
+            print(f"Tarih seçiminiz :{gün}-{ay}-{yıl}")
+            break 
         else:
-            print("Tarih seçerken hata yaptınız.Lütfen başa döünüz.")
-            exit()
-elif (ay=="ocak" or ay=="mart" or ay=="mayıs" or ay=="temmuz" or
-          ay=="ağustos" or ay=="kasım") :
+            print("Gün seçerken hata yaptınız.Lütfen tekrar gün seçiniz.")
+    elif ay==1 or ay==3 or ay==5 or ay==7 or ay==8 or ay==10 or ay==12:
         if gün<=31:
-            print(f"Tarih seçiminiz:{yıl}-{ayı}-{gün}")
+            print(f"Tarih seçiminiz :{gün}-{ay}-{yıl}")
+            break 
         else:
-            print("Tarih seçerken hata yaptınız.Lütfen başa döünüz.")
-            exit()
-else: 
-    if gün<=30:
-        print(f"Tarih seçiminiz:{yıl}-{ayı}-{gün}")
+            print("Gün seçerken hata yaptınız.Lütfen tekrar gün seçiniz.")
     else:
-        print("Tarih seçerken hata yaptınız.Lütfen başa döünüz.")
-        exit()
-time.sleep(1)
-havalimanlari_listesi=["Ankara Esenboğa Havalimanı","İstanbul Sabiha Gökçen Havalimanı","Van Ferit Melen Havalimanı",
+        if gün<30:
+            print(f"Tarih seçiminiz :{gün}-{ay}-{yıl}")
+            break
+        else:
+            print("Gün seçerken hata yaptınız.Lütfen tekrar gün seçiniz.")
+while True:
+    havalimanlari_listesi=["Ankara Esenboğa Havalimanı","İstanbul Sabiha Gökçen Havalimanı","Van Ferit Melen Havalimanı",
                             "Izmir Adnan Menderes Havalimanı","Fraport Tav Antalya Havalimanı"]
+    if kalkış_havalimanı==havalimanlari_listesi[0]:
+        if varış_havalimanı==havalimanlari_listesi[1]:
+            try:
+                uçuş_saatleri={1:"09.00",2:"11.00",3:"13.45",4:"17.30",5:"23.00"}
+                for key,value in uçuş_saatleri.items():
+                    print(f"{key}:{value}")
+                uçuş_seç=int(input("İstediğiniz uçuş saatine uygun uçuş numarasını girin:"))
+                uçuş=uçuş_saatleri[uçuş_seç]
+                print(f"Uçuşunuz:{gün}-{ayı}-{yıl} saat {uçuş}")
+                break
+            except KeyError:               
+                print("Yanlış seçim yaptınız.Tekrar deneyiniz.")
+        elif varış_havalimanı==havalimanlari_listesi[2]:
+            try:
+                uçuş_saatleri={1:"06.00",2:"10.00"}
+                for key,value in uçuş_saatleri.items():
+                    print(f"{key}:{value}")
+                uçuş_seç=int(input("İstediğiniz uçuş saatine uygun uçuş numarasını girin:"))
+                uçuş=uçuş_saatleri[uçuş_seç]
+                print(f"Uçuşunuz:{gün}-{ayı}-{yıl} saat {uçuş}")
+                break
+            except KeyError:
+                print("Yanlış seçim yaptınız.Tekrar deneyiniz.")
+        elif varış_havalimanı==havalimanlari_listesi[3]:
+            try:
+                uçuş_saatleri={1:"12.00",2:"16.00",3:"22.15"}
+                for key,value in uçuş_saatleri.items():
+                    print(f"{key}:{value}")
+                uçuş_seç=int(input("İstediğiniz uçuş saatine uygun uçuş numarasını girin:"))
+                uçuş=uçuş_saatleri[uçuş_seç]
+                print(f"Uçuşunuz:{gün}-{ayı}-{yıl} saat {uçuş}")
+                break
+            except KeyError:
+                print("Yanlış seçim yaptınız.Tekrar deneyiniz.")
+        elif varış_havalimanı==havalimanlari_listesi[4]:
+            try:
+                uçuş_saatleri={1:"07.00",2:"13.30",3:"21.45"}
+                for key,value in uçuş_saatleri.items():
+                    print(f"{key}:{value}")
+                uçuş_seç=int(input("İstediğiniz uçuş saatine uygun uçuş numarasını girin:"))
+                uçuş=uçuş_saatleri[uçuş_seç]
+                print(f"Uçuşunuz:{gün}-{ayı}-{yıl} saat {uçuş}")
+                break
+            except KeyError:
+                print("Yanlış seçim yaptınız.Tekrar deneyiniz.")
+    elif kalkış_havalimanı==havalimanlari_listesi[1]:
+        if varış_havalimanı==havalimanlari_listesi[0]:
+            try:
+                uçuş_saatleri={1:"07.00",2:"10.00",3:"15.00",4:"18.00"}
+                for key,value in uçuş_saatleri.items():
+                     print(f"{key}:{value}")
+                uçuş_seç=int(input("İstediğiniz uçuş saatine uygun uçuş numarasını girin:"))
+                uçuş=uçuş_saatleri[uçuş_seç]
+                print(f"Uçuşunuz:{gün}-{ayı}-{yıl} saat {uçuş}")
+                break
+            except KeyError:               
+                print("Yanlış seçim yaptınız.Tekrar deneyiniz.")
+        elif varış_havalimanı==havalimanlari_listesi[2]:
+            try:
+                uçuş_saatleri={1:"08.00",2:"12.00",3:"20.00"}
+                for key,value in uçuş_saatleri.items():
+                    print(f"{key}:{value}")
+                uçuş_seç=int(input("İstediğiniz uçuş saatine uygun uçuş numarasını girin:"))
+                uçuş=uçuş_saatleri[uçuş_seç]
+                print(f"Uçuşunuz:{gün}-{ayı}-{yıl} saat {uçuş}")
+                break
+            except KeyError:
+                print("Yanlış seçim yaptınız.Tekrar deneyiniz.")
+        elif varış_havalimanı==havalimanlari_listesi[3]:
+            try:
+                uçuş_saatleri={1:"09.00",2:"13.00",3:"19.00",4:"22.00"}
+                for key,value in uçuş_saatleri.items():
+                    print(f"{key}:{value}")
+                uçuş_seç=int(input("İstediğiniz uçuş saatine uygun uçuş numarasını girin:"))
+                uçuş=uçuş_saatleri[uçuş_seç]
+                print(f"Uçuşunuz:{gün}-{ayı}-{yıl} saat {uçuş}")
+                break
+            except KeyError:
+                print("Yanlış seçim yaptınız.Tekrar deneyiniz.")
+        elif varış_havalimanı==havalimanlari_listesi[4]:
+            try:
+                uçuş_saatleri={1:"08.30",2:"11.150",3:"20.30",4:"23.45"}
+                for key,value in uçuş_saatleri.items():
+                    print(f"{key}:{value}")
+                uçuş_seç=int(input("İstediğiniz uçuş saatine uygun uçuş numarasını girin:"))
+                uçuş=uçuş_saatleri[uçuş_seç]
+                print(f"Uçuşunuz:{gün}-{ayı}-{yıl} saat {uçuş}")
+                break
+            except KeyError:
+                print("Yanlış seçim yaptınız.Tekrar deneyiniz.")
+    elif kalkış_havalimanı==havalimanlari_listesi[2]: 
+        if varış_havalimanı==havalimanlari_listesi[1]:
+            try:
+                uçuş_saatleri={1:"12.00",2:"16.15",3:"20.45"}
+                for key,value in uçuş_saatleri.items():
+                    print(f"{key}:{value}")
+                uçuş_seç=int(input("İstediğiniz uçuş saatine uygun uçuş numarasını girin:"))
+                uçuş=uçuş_saatleri[uçuş_seç]
+                print(f"Uçuşunuz:{gün}-{ayı}-{yıl} saat {uçuş}")
+                break
+            except KeyError:               
+                print("Yanlış seçim yaptınız.Tekrar deneyiniz.")
+        elif varış_havalimanı==havalimanlari_listesi[0]:
+            try:
+                uçuş_saatleri={1:"09.30",2:"14.00",3:"17.15"}
+                for key,value in uçuş_saatleri.items():
+                    print(f"{key}:{value}")
+                uçuş_seç=int(input("İstediğiniz uçuş saatine uygun uçuş numarasını girin:"))
+                uçuş=uçuş_saatleri[uçuş_seç]
+                print(f"Uçuşunuz:{gün}-{ayı}-{yıl} saat {uçuş}")
+                break
+            except KeyError:
+                print("Yanlış seçim yaptınız.Tekrar deneyiniz.")
+        elif varış_havalimanı==havalimanlari_listesi[3]:
+            try:
+                uçuş_saatleri={1:"08.00",2:"15.30"}
+                for key,value in uçuş_saatleri.items():
+                    print(f"{key}:{value}")
+                uçuş_seç=int(input("İstediğiniz uçuş saatine uygun uçuş numarasını girin:"))
+                uçuş=uçuş_saatleri[uçuş_seç]
+                print(f"Uçuşunuz:{gün}-{ayı}-{yıl} saat {uçuş}")
+                break
+            except KeyError:
+                print("Yanlış seçim yaptınız.Tekrar deneyiniz.")
+        elif varış_havalimanı==havalimanlari_listesi[4]:
+            try:
+                uçuş_saatleri={1:"13.00",2:"19.00"}
+                for key,value in uçuş_saatleri.items():
+                    print(f"{key}:{value}")
+                uçuş_seç=int(input("İstediğiniz uçuş saatine uygun uçuş numarasını girin:"))
+                uçuş=uçuş_saatleri[uçuş_seç]
+                print(f"Uçuşunuz:{gün}-{ayı}-{yıl} saat {uçuş}")
+                break
+            except KeyError:
+                print("Yanlış seçim yaptınız.Tekrar deneyiniz.")
+    elif kalkış_havalimanı==havalimanlari_listesi[3]:
+        if varış_havalimanı==havalimanlari_listesi[1]:
+            try:
+                uçuş_saatleri={1:"07.00",2:"11.00",3:"17.45",4:"22.30"}
+                for key,value in uçuş_saatleri.items():
+                    print(f"{key}:{value}")
+                uçuş_seç=int(input("İstediğiniz uçuş saatine uygun uçuş numarasını girin:"))
+                uçuş=uçuş_saatleri[uçuş_seç]
+                print(f"Uçuşunuz:{gün}-{ayı}-{yıl} saat {uçuş}")
+                break
+            except KeyError:               
+                print("Yanlış seçim yaptınız.Tekrar deneyiniz.")
+        elif varış_havalimanı==havalimanlari_listesi[0]:
+            try:
+                uçuş_saatleri={1:"12.00",2:"18.00",3:"21.00"}
+                for key,value in uçuş_saatleri.items():
+                    print(f"{key}:{value}")
+                uçuş_seç=int(input("İstediğiniz uçuş saatine uygun uçuş numarasını girin:"))
+                uçuş=uçuş_saatleri[uçuş_seç]
+                print(f"Uçuşunuz:{gün}-{ayı}-{yıl} saat {uçuş}")
+                break
+            except KeyError:
+                print("Yanlış seçim yaptınız.Tekrar deneyiniz.") 
+        elif varış_havalimanı==havalimanlari_listesi[2]:
+            try:
+                uçuş_saatleri={1:"09.00",2:"11.15",3:"18.45"}
+                for key,value in uçuş_saatleri.items():
+                    print(f"{key}:{value}")
+                uçuş_seç=int(input("İstediğiniz uçuş saatine uygun uçuş numarasını girin:"))
+                uçuş=uçuş_saatleri[uçuş_seç]
+                print(f"Uçuşunuz:{gün}-{ayı}-{yıl} saat {uçuş}")
+                break
+            except KeyError:
+                print("Yanlış seçim yaptınız.Tekrar deneyiniz.") 
+        elif varış_havalimanı==havalimanlari_listesi[4]:
+            try:
+                uçuş_saatleri={1:"06.30",2:"10.00",3:"19.45"}
+                for key,value in uçuş_saatleri.items():
+                    print(f"{key}:{value}")
+                uçuş_seç=int(input("İstediğiniz uçuş saatine uygun uçuş numarasını girin:"))
+                uçuş=uçuş_saatleri[uçuş_seç]
+                print(f"Uçuşunuz:{gün}-{ayı}-{yıl} saat {uçuş}")
+            except KeyError:
+                print("Yanlış seçim yaptınız.Tekrar deneyiniz.")
+    elif kalkış_havalimanı==havalimanlari_listesi[4]:
 
-if kalkış_havalimanı==havalimanlari_listesi[0]:
-    if varış_havalimanı==havalimanlari_listesi[1]:
-        try:
-            uçuş_saatleri={1:"09.00",2:"11.00"}
-            for key,value in uçuş_saatleri.items():
-                print(f"{key}:{value}")
-            uçuş_seç=int(input("İstediğiniz uçuş saatine uygun uçuş numarasını girin:"))
-            uçuş=uçuş_saatleri[uçuş_seç]
-            print(f"Uçuşunuz:{gün}-{ay}-{yıl} saat {uçuş}")
-        except KeyError:               
-            print("Yanlış seçim yaptınız.Başa dönünüz.")
-    elif varış_havalimanı==havalimanlari_listesi[2]:
-        try:
-            uçuş_saatleri={1:"09.00",2:"11.00"}
-            for key,value in uçuş_saatleri.items():
-                print(f"{key}:{value}")
-            uçuş_seç=int(input("İstediğiniz uçuş saatine uygun uçuş numarasını girin:"))
-            uçuş=uçuş_saatleri[uçuş_seç]
-            print(f"Uçuşunuz:{gün}-{ay}-{yıl} saat {uçuş}")
-        except KeyError:
-            print("Yanlış seçim yaptınız.Başa dönünüz.") 
-    elif varış_havalimanı==havalimanlari_listesi[3]:
-        try:
-            uçuş_saatleri={1:"09.00",2:"11.00"}
-            for key,value in uçuş_saatleri.items():
-                print(f"{key}:{value}")
-            uçuş_seç=int(input("İstediğiniz uçuş saatine uygun uçuş numarasını girin:"))
-            uçuş=uçuş_saatleri[uçuş_seç]
-            print(f"Uçuşunuz:{gün}-{ay}-{yıl} saat {uçuş}")
-        except KeyError:
-            print("Yanlış seçim yaptınız.Başa dönünüz.") 
-    elif varış_havalimanı==havalimanlari_listesi[4]:
-        try:
-            uçuş_saatleri={1:"09.00",2:"11.00"}
-            for key,value in uçuş_saatleri.items():
-                print(f"{key}:{value}")
-            uçuş_seç=int(input("İstediğiniz uçuş saatine uygun uçuş numarasını girin:"))
-            uçuş=uçuş_saatleri[uçuş_seç]
-            print(f"Uçuşunuz:{gün}-{ay}-{yıl} saat {uçuş}")
-        except KeyError:
-            print("Yanlış seçim yaptınız.Başa dönünüz.") 
-elif kalkış_havalimanı==havalimanlari_listesi[1]:
-    if varış_havalimanı==havalimanlari_listesi[0]:
-        try:
-            uçuş_saatleri={1:"09.00",2:"11.00"}
-            for key,value in uçuş_saatleri.items():
-                print(f"{key}:{value}")
-            uçuş_seç=int(input("İstediğiniz uçuş saatine uygun uçuş numarasını girin:"))
-            uçuş=uçuş_saatleri[uçuş_seç]
-            print(f"Uçuşunuz:{gün}-{ay}-{yıl} saat {uçuş}")
-        except KeyError:               
-            print("Yanlış seçim yaptınız.Başa dönünüz.")
-    elif varış_havalimanı==havalimanlari_listesi[2]:
-        try:
-            uçuş_saatleri={1:"09.00",2:"11.00"}
-            for key,value in uçuş_saatleri.items():
-                print(f"{key}:{value}")
-            uçuş_seç=int(input("İstediğiniz uçuş saatine uygun uçuş numarasını girin:"))
-            uçuş=uçuş_saatleri[uçuş_seç]
-            print(f"Uçuşunuz:{gün}-{ay}-{yıl} saat {uçuş}")
-        except KeyError:
-            print("Yanlış seçim yaptınız.Başa dönünüz.") 
-    elif varış_havalimanı==havalimanlari_listesi[3]:
-        try:
-            uçuş_saatleri={1:"09.00",2:"11.00"}
-            for key,value in uçuş_saatleri.items():
-                print(f"{key}:{value}")
-            uçuş_seç=int(input("İstediğiniz uçuş saatine uygun uçuş numarasını girin:"))
-            uçuş=uçuş_saatleri[uçuş_seç]
-            print(f"Uçuşunuz:{gün}-{ay}-{yıl} saat {uçuş}")
-        except KeyError:
-            print("Yanlış seçim yaptınız.Başa dönünüz.") 
-    elif varış_havalimanı==havalimanlari_listesi[4]:
-        try:
-            uçuş_saatleri={1:"09.00",2:"11.00"}
-            for key,value in uçuş_saatleri.items():
-                print(f"{key}:{value}")
-            uçuş_seç=int(input("İstediğiniz uçuş saatine uygun uçuş numarasını girin:"))
-            uçuş=uçuş_saatleri[uçuş_seç]
-            print(f"Uçuşunuz:{gün}-{ay}-{yıl} saat {uçuş}")
-        except KeyError:
-            print("Yanlış seçim yaptınız.Başa dönünüz.") 
-elif kalkış_havalimanı==havalimanlari_listesi[2]:
-    if varış_havalimanı==havalimanlari_listesi[1]:
-        try:
-            uçuş_saatleri={1:"09.00",2:"11.00"}
-            for key,value in uçuş_saatleri.items():
-                print(f"{key}:{value}")
-            uçuş_seç=int(input("İstediğiniz uçuş saatine uygun uçuş numarasını girin:"))
-            uçuş=uçuş_saatleri[uçuş_seç]
-            print(f"Uçuşunuz:{gün}-{ay}-{yıl} saat {uçuş}")
-        except KeyError:               
-            print("Yanlış seçim yaptınız.Başa dönünüz.")
-    elif varış_havalimanı==havalimanlari_listesi[0]:
-        try:
-            uçuş_saatleri={1:"09.00",2:"11.00"}
-            for key,value in uçuş_saatleri.items():
-                print(f"{key}:{value}")
-            uçuş_seç=int(input("İstediğiniz uçuş saatine uygun uçuş numarasını girin:"))
-            uçuş=uçuş_saatleri[uçuş_seç]
-            print(f"Uçuşunuz:{gün}-{ay}-{yıl} saat {uçuş}")
-        except KeyError:
-            print("Yanlış seçim yaptınız.Başa dönünüz.") 
-    elif varış_havalimanı==havalimanlari_listesi[3]:
-        try:
-            uçuş_saatleri={1:"09.00",2:"11.00"}
-            for key,value in uçuş_saatleri.items():
-                print(f"{key}:{value}")
-            uçuş_seç=int(input("İstediğiniz uçuş saatine uygun uçuş numarasını girin:"))
-            uçuş=uçuş_saatleri[uçuş_seç]
-            print(f"Uçuşunuz:{gün}-{ay}-{yıl} saat {uçuş}")
-        except KeyError:
-            print("Yanlış seçim yaptınız.Başa dönünüz.") 
-    elif varış_havalimanı==havalimanlari_listesi[4]:
-        try:
-            uçuş_saatleri={1:"09.00",2:"11.00"}
-            for key,value in uçuş_saatleri.items():
-                print(f"{key}:{value}")
-            uçuş_seç=int(input("İstediğiniz uçuş saatine uygun uçuş numarasını girin:"))
-            uçuş=uçuş_saatleri[uçuş_seç]
-            print(f"Uçuşunuz:{gün}-{ay}-{yıl} saat {uçuş}")
-        except KeyError:
-            print("Yanlış seçim yaptınız.Başa dönünüz.") 
-elif kalkış_havalimanı==havalimanlari_listesi[3]:
-    if varış_havalimanı==havalimanlari_listesi[1]:
-        try:
-            uçuş_saatleri={1:"09.00",2:"11.00"}
-            for key,value in uçuş_saatleri.items():
-                print(f"{key}:{value}")
-            uçuş_seç=int(input("İstediğiniz uçuş saatine uygun uçuş numarasını girin:"))
-            uçuş=uçuş_saatleri[uçuş_seç]
-            print(f"Uçuşunuz:{gün}-{ay}-{yıl} saat {uçuş}")
-        except KeyError:               
-            print("Yanlış seçim yaptınız.Başa dönünüz.")
-    elif varış_havalimanı==havalimanlari_listesi[0]:
-        try:
-            uçuş_saatleri={1:"09.00",2:"11.00"}
-            for key,value in uçuş_saatleri.items():
-                print(f"{key}:{value}")
-            uçuş_seç=int(input("İstediğiniz uçuş saatine uygun uçuş numarasını girin:"))
-            uçuş=uçuş_saatleri[uçuş_seç]
-            print(f"Uçuşunuz:{gün}-{ay}-{yıl} saat {uçuş}")
-        except KeyError:
-            print("Yanlış seçim yaptınız.Başa dönünüz.") 
-    elif varış_havalimanı==havalimanlari_listesi[2]:
-        try:
-            uçuş_saatleri={1:"09.00",2:"11.00"}
-            for key,value in uçuş_saatleri.items():
-                print(f"{key}:{value}")
-            uçuş_seç=int(input("İstediğiniz uçuş saatine uygun uçuş numarasını girin:"))
-            uçuş=uçuş_saatleri[uçuş_seç]
-            print(f"Uçuşunuz:{gün}-{ay}-{yıl} saat {uçuş}")
-        except KeyError:
-            print("Yanlış seçim yaptınız.Başa dönünüz.") 
-    elif varış_havalimanı==havalimanlari_listesi[4]:
-        try:
-            uçuş_saatleri={1:"09.00",2:"11.00"}
-            for key,value in uçuş_saatleri.items():
-                print(f"{key}:{value}")
-            uçuş_seç=int(input("İstediğiniz uçuş saatine uygun uçuş numarasını girin:"))
-            uçuş=uçuş_saatleri[uçuş_seç]
-            print(f"Uçuşunuz:{gün}-{ay}-{yıl} saat {uçuş}")
-        except KeyError:
-            print("Yanlış seçim yaptınız.Başa dönünüz.") 
-elif kalkış_havalimanı==havalimanlari_listesi[4]:
-    if varış_havalimanı==havalimanlari_listesi[1]:
-        try:
-            uçuş_saatleri={1:"09.00",2:"11.00"}
-            for key,value in uçuş_saatleri.items():
-                print(f"{key}:{value}")
-            uçuş_seç=int(input("İstediğiniz uçuş saatine uygun uçuş numarasını girin:"))
-            uçuş=uçuş_saatleri[uçuş_seç]
-            print(f"Uçuşunuz:{gün}-{ay}-{yıl} saat {uçuş}")
-        except KeyError:               
-            print("Yanlış seçim yaptınız.Başa dönünüz.")
-    elif varış_havalimanı==havalimanlari_listesi[2]:
-        try:
-            uçuş_saatleri={1:"09.00",2:"11.00"}
-            for key,value in uçuş_saatleri.items():
-                print(f"{key}:{value}")
-            uçuş_seç=int(input("İstediğiniz uçuş saatine uygun uçuş numarasını girin:"))
-            uçuş=uçuş_saatleri[uçuş_seç]
-            print(f"Uçuşunuz:{gün}-{ay}-{yıl} saat {uçuş}")
-        except KeyError:
-            print("Yanlış seçim yaptınız.Başa dönünüz.") 
-    elif varış_havalimanı==havalimanlari_listesi[3]:
-        try:
-            uçuş_saatleri={1:"09.00",2:"11.00"}
-            for key,value in uçuş_saatleri.items():
-                print(f"{key}:{value}")
-            uçuş_seç=int(input("İstediğiniz uçuş saatine uygun uçuş numarasını girin:"))
-            uçuş=uçuş_saatleri[uçuş_seç]
-            print(f"Uçuşunuz:{gün}-{ay}-{yıl} saat {uçuş}")
-        except KeyError:
-            print("Yanlış seçim yaptınız.Başa dönünüz.") 
-    elif varış_havalimanı==havalimanlari_listesi[0]:
-        try:
-            uçuş_saatleri={1:"09.00",2:"11.00"}
-            for key,value in uçuş_saatleri.items():
-                print(f"{key}:{value}")
-            uçuş_seç=int(input("İstediğiniz uçuş saatine uygun uçuş numarasını girin:"))
-            uçuş=uçuş_saatleri[uçuş_seç]
-            print(f"Uçuşunuz:{gün}-{ay}-{yıl} saat {uçuş}")
-        except KeyError:
-            print("Yanlış seçim yaptınız.Başa dönünüz.") 
+        if varış_havalimanı==havalimanlari_listesi[1]:
+            try:
+                uçuş_saatleri={1:"11.45",2:"15.00",3:"20.45",4:"23.45"}
+                for key,value in uçuş_saatleri.items():
+                    print(f"{key}:{value}")
+                uçuş_seç=int(input("İstediğiniz uçuş saatine uygun uçuş numarasını girin:"))
+                uçuş=uçuş_saatleri[uçuş_seç]
+                print(f"Uçuşunuz:{gün}-{ayı}-{yıl} saat {uçuş}")
+                break
+            except KeyError:               
+                print("Yanlış seçim yaptınız.Tekrar deneyiniz.")
+        elif varış_havalimanı==havalimanlari_listesi[2]:
+            try:
+                uçuş_saatleri={1:"07.30",2:"14.30",3:"18.15"}
+                for key,value in uçuş_saatleri.items():
+                    print(f"{key}:{value}")
+                uçuş_seç=int(input("İstediğiniz uçuş saatine uygun uçuş numarasını girin:"))
+                uçuş=uçuş_saatleri[uçuş_seç]
+                print(f"Uçuşunuz:{gün}-{ayı}-{yıl} saat {uçuş}")
+                break
+            except KeyError:
+                print("Yanlış seçim yaptınız.Tekrar deneyiniz.") 
+        elif varış_havalimanı==havalimanlari_listesi[3]:
+            try:
+                uçuş_saatleri={1:"09.30",2:"15.40",3:"20.00"}
+                for key,value in uçuş_saatleri.items():
+                    print(f"{key}:{value}")
+                uçuş_seç=int(input("İstediğiniz uçuş saatine uygun uçuş numarasını girin:"))
+                uçuş=uçuş_saatleri[uçuş_seç]
+                print(f"Uçuşunuz:{gün}-{ayı}-{yıl} saat {uçuş}")
+                break
+            except KeyError:
+                print("Yanlış seçim yaptınız.Tekrar deneyiniz.") 
+        elif varış_havalimanı==havalimanlari_listesi[0]:
+            try:
+                uçuş_saatleri={1:"10.00",2:"17.00",3:"22.15"}
+                for key,value in uçuş_saatleri.items():
+                    print(f"{key}:{value}")
+                uçuş_seç=int(input("İstediğiniz uçuş saatine uygun uçuş numarasını girin:"))
+                uçuş=uçuş_saatleri[uçuş_seç]
+                print(f"Uçuşunuz:{gün}-{ayı}-{yıl} saat {uçuş}")
+                break
+            except KeyError:
+                print("Yanlış seçim yaptınız.Tekrar deneyiniz.")
+print(" ")
 time.sleep(1)
+print("Lütfen bilet türünü ve sınıfını seçiniz.")
+
 class Sınıf:
     def __init__(self, bilet_türü=None, koltuk_sınıfı=None):
         self.bilet_türü = bilet_türü
         self.koltuk_sınıfı = koltuk_sınıfı
 
     def biletTürü(self):
-        print("Bilet türleri:")
+        print("BİLET TÜRLERİ")
         bilet_türleri = {
             "Yetişkin": "Tam bilet",
             "Çocuk": "18 yaş altı çocuklar için %25 indirimli bilet"
@@ -303,7 +335,7 @@ class Sınıf:
         else:
             print("Geçersiz seçim. Lütfen doğru bir bilet türü seçiniz.")
     def koltukSınıfı(self):
-        print("Sınıf türleri ve hakları:")
+        print("SINIF TÜRLERİ ve HAKLARI")
         sınıf_türleri = {
             "Ekonomi": "15 kg bagaj hakkı - 8 kg el bagajı hakkı - 500 mil puanı",
             "Prime": "25 kg bagaj hakkı - 8 kg el bagajı hakkı - 1000 mil puanı - ikram - bilet fiyatının 1.5 katı"
@@ -343,12 +375,12 @@ def kişi_bilgileri():
     soyad=str(input("Lütfen soyadınızı giriniz:"))
     tc=int(input("Lütfen 11 haneli kimlik numaranızı giriniz:"))
     yaş=int(input("Lütfen yaşınızı giriniz:"))
-    with open("bilgiler.txt", "w", encoding="utf-8") as file:
+    with open(f"{ayı}.txt", "w", encoding="utf-8") as file:
         file.write(f"Adınız: {ad} {soyad}\n")
         file.write(f"TC kimlik numaranız: {tc}\n")
         file.write(f"Yaşınız: {yaş}\n")
         file.write(f"Uçuşunuz: {kalkış_havalimanı} - {varış_havalimanı}\n")
-        file.write(f"Uçuş tarihi: {gün}-{ay}-{yıl}\n")
+        file.write(f"Uçuş tarihi: {gün}-{ayı}-{yıl}\n")
 kişi_bilgileri()  
 
 
