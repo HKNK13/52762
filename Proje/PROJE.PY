@@ -8,10 +8,10 @@ havalimanlari={
     3:"Van Ferit Melen Havalimanı",
     4:"Izmir Adnan Menderes Havalimanı",
     5:"Fraport Tav Antalya Havalimanı"}
-print("Havalimanları:")
-for key,value in havalimanlari.items():
-    print(f"{key}:{value}")
 while True:
+    print("Havalimanları:")
+    for key,value in havalimanlari.items():
+        print(f"{key}:{value}")
     try:
         kalkış_seçimi=int(input("Kalkış Havalimanı numarasını giriniz:"))
         kalkış_havalimanı=havalimanlari[kalkış_seçimi]
@@ -20,11 +20,11 @@ while True:
         time.sleep(1)
         break
     except KeyError:
-        print("Yanlış seçim yaptınız.Lütfen varış havalimaını tekrar seçiniz.")
-del(havalimanlari[kalkış_seçimi])
-for key,value in havalimanlari.items():
-    print(f"{key}:{value}")  
+        print("Yanlış seçim yaptınız.Lütfen kalkış havalimaını tekrar seçiniz.")
+del(havalimanlari[kalkış_seçimi]) 
 while True:
+    for key,value in havalimanlari.items():
+        print(f"{key}:{value}") 
     try:
         varış_seçimi=int(input("Varış Havalimanı numarasını giriniz:"))
         varış_havalimanı=havalimanlari[varış_seçimi]
@@ -321,33 +321,37 @@ class Sınıf:
         self.koltuk_sınıfı = koltuk_sınıfı
 
     def biletTürü(self):
-        print("BİLET TÜRLERİ")
-        bilet_türleri = {
-            "Yetişkin": "Tam bilet",
-            "Çocuk": "18 yaş altı çocuklar için %25 indirimli bilet"
-        }
-        for key, value in bilet_türleri.items():
-            print(f"{key}: {value}")
-        bilet_seç = str(input("Almak istediğiniz bilet türünü seçiniz: ")).capitalize()
-        if bilet_seç in bilet_türleri:
-            self.bilet_türü = bilet_seç
-            print("Bilet türünüz: " + bilet_seç + " (" + bilet_türleri[bilet_seç] + ")")
-        else:
-            print("Geçersiz seçim. Lütfen doğru bir bilet türü seçiniz.")
+        while True:
+            print("BİLET TÜRLERİ")
+            bilet_türleri = {
+                "Yetişkin": "Tam bilet",
+                "Çocuk": "18 yaş altı çocuklar için %25 indirimli bilet"
+            }
+            for key, value in bilet_türleri.items():
+                print(f"{key}: {value}")
+            bilet_seç = str(input("Almak istediğiniz bilet türünü seçiniz: ")).capitalize()
+            if bilet_seç in bilet_türleri:
+                self.bilet_türü = bilet_seç
+                print("Bilet türünüz: " + bilet_seç + " (" + bilet_türleri[bilet_seç] + ")")
+                break
+            else:
+                print("Geçersiz seçim. Lütfen doğru bir bilet türü seçiniz.")
     def koltukSınıfı(self):
-        print("SINIF TÜRLERİ ve HAKLARI")
-        sınıf_türleri = {
-            "Ekonomi": "15 kg bagaj hakkı - 8 kg el bagajı hakkı - 500 mil puanı",
-            "Prime": "25 kg bagaj hakkı - 8 kg el bagajı hakkı - 1000 mil puanı - ikram - bilet fiyatının 1.5 katı"
-        }
-        for key, value in sınıf_türleri.items():
-            print(f"{key}: {value}")
-        sınıf_seç = str(input("Almak istediğiniz bilet sınıfını seçiniz: ")).capitalize()
-        if sınıf_seç in sınıf_türleri:
-            self.koltuk_sınıfı = sınıf_seç
-            print("Bilet sınıfınız: " + sınıf_seç)
-        else:
-            print("Geçersiz seçim. Lütfen doğru bir bilet sınıfı seçiniz.")
+        while True:
+            print("SINIF TÜRLERİ ve HAKLARI")
+            sınıf_türleri = {
+                "Ekonomi": "15 kg bagaj hakkı - 8 kg el bagajı hakkı - 500 mil puanı",
+                "Prime": "25 kg bagaj hakkı - 8 kg el bagajı hakkı - 1000 mil puanı - ikram - bilet fiyatının 1.5 katı"
+                }  
+            for key, value in sınıf_türleri.items():
+                print(f"{key}: {value}")
+            sınıf_seç = str(input("Almak istediğiniz bilet sınıfını seçiniz: ")).capitalize()
+            if sınıf_seç in sınıf_türleri:
+                self.koltuk_sınıfı = sınıf_seç
+                print("Bilet sınıfınız: " + sınıf_seç)
+                break
+            else:
+                print("Geçersiz seçim. Lütfen doğru bir bilet sınıfı seçiniz.")
 class Fiyat(Sınıf):
     def __init__(self, bilet_türü=None, koltuk_sınıfı=None, fiyat=2000):
         super().__init__(bilet_türü, koltuk_sınıfı)
@@ -362,25 +366,23 @@ class Fiyat(Sınıf):
             print(f"Fiyat: {self.fiyat * 1.5} TL")
         elif self.koltuk_sınıfı == "Prime" and self.bilet_türü == "Çocuk":
             print(f"Fiyat: {self.fiyat * 1.5 * 0.75} TL")
-        else:
-            print("Bilet türü veya koltuk sınıfı hatalı.")
 bilet = Sınıf()
 bilet.biletTürü()
 bilet.koltukSınıfı()
 bilet_fiyatı = Fiyat(bilet.bilet_türü, bilet.koltuk_sınıfı)
 bilet_fiyatı.bilet_fiyat()
-
 def kişi_bilgileri():
     ad=str(input("Lütfen adınızı giriniz:"))
     soyad=str(input("Lütfen soyadınızı giriniz:"))
     tc=int(input("Lütfen 11 haneli kimlik numaranızı giriniz:"))
     yaş=int(input("Lütfen yaşınızı giriniz:"))
-    with open(f"{ayı}.txt", "w", encoding="utf-8") as file:
+    with open(f"{tc}.txt", "w", encoding="utf-8") as file:
         file.write(f"Adınız: {ad} {soyad}\n")
         file.write(f"TC kimlik numaranız: {tc}\n")
         file.write(f"Yaşınız: {yaş}\n")
         file.write(f"Uçuşunuz: {kalkış_havalimanı} - {varış_havalimanı}\n")
         file.write(f"Uçuş tarihi: {gün}-{ayı}-{yıl}\n")
+        file.write(f"Uçuş saati: {uçuş}\n")
 kişi_bilgileri()  
 
 
