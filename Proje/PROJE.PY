@@ -51,6 +51,8 @@ while True:
     ay=int(input("İşlem yapmak istediğniz ayın numarasını giriniz(1 den 12 e kadar): ")) 
     if ay>12:
         print("Ay seçerken hata yaptınız.Tekrar seçiniz.")
+    elif yıl<=2024 and ay<=8:
+        print("Ay seçerken hata yaptınız.Tekrar seçiniz. ")
     else :
         ayı=aylar[ay]
         break
@@ -372,8 +374,8 @@ bilet.koltukSınıfı()
 bilet_fiyatı = Fiyat(bilet.bilet_türü, bilet.koltuk_sınıfı)
 bilet_fiyatı.bilet_fiyat()
 def kişi_bilgileri():
-    ad=str(input("Lütfen adınızı giriniz:"))
-    soyad=str(input("Lütfen soyadınızı giriniz:"))
+    ad=str(input("Lütfen adınızı giriniz:")).capitalize()
+    soyad=str(input("Lütfen soyadınızı giriniz:")).lower()
     tc=int(input("Lütfen 11 haneli kimlik numaranızı giriniz:"))
     yaş=int(input("Lütfen yaşınızı giriniz:"))
     with open(f"{tc}.txt", "w", encoding="utf-8") as file:
