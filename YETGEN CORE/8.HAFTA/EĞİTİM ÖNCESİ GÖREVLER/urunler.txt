@@ -1,0 +1,2 @@
+Ürün ismi :canga ürün fiyatı:19.0
+Ürün ismi :Dido ürün fiyatı:15.0
